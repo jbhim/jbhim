@@ -3,6 +3,8 @@ package com.amcjt.jbhim.service.impl;
 import com.amcjt.jbhim.entity.SysMenuEntity;
 import com.amcjt.jbhim.service.SysMenuService;
 import com.amcjt.jbhim.utils.UUIDGenerator;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.RuntimeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class SysMenuServiceImplTest {
     @Autowired
     private SysMenuService sysMenuService;
 
+    @Autowired
+    private ProcessEngine processEngine;
     @Test
     public void findAllMenu() {
         List<SysMenuEntity> allMenu = sysMenuService.findAllMenu();
@@ -33,6 +37,14 @@ public class SysMenuServiceImplTest {
         SysMenuEntity saveMenu = sysMenuService.saveMenu(sysMenuEntity);
         System.out.println(saveMenu);
 
-
     }
+
+    @Test
+    public void run(){
+        String name = processEngine.getName();
+        System.out.println(name);
+    }
+
+
+
 }
