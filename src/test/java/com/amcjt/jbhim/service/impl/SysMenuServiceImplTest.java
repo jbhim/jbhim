@@ -4,6 +4,7 @@ import com.amcjt.jbhim.entity.SysMenuEntity;
 import com.amcjt.jbhim.service.SysMenuService;
 import com.amcjt.jbhim.utils.UUIDGenerator;
 import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.junit.Test;
@@ -29,6 +30,10 @@ public class SysMenuServiceImplTest {
     @Autowired
     private ProcessEngine processEngine;
 
+    @Autowired
+    private RuntimeService runtimeService;
+
+
     @Test
     public void findAllMenu() {
         List<SysMenuEntity> allMenu = sysMenuService.findAllMenu();
@@ -47,13 +52,16 @@ public class SysMenuServiceImplTest {
 
     }
 
+    /**
+     * 流程部署
+     */
     @Test
     public void deploy() {
         Deployment deploy = processEngine.getRepositoryService()
                 .createDeployment()
                 .name("HelloWorld")
                 .addClasspathResource("processes/HelloWorld.bpmn")
-                .addClasspathResource("public/files/HelloWorld.png")
+                .addClasspathResource("processes/HelloWorld.png")
                 .deploy();
         System.out.println("部署流程===>  流程id:" + deploy.getId() + "     流程名:" + deploy.getName());
     }
@@ -98,8 +106,9 @@ public class SysMenuServiceImplTest {
      */
     @Test
     public void viewImage() throws IOException {
+        String deploymentId = "2501";
         List<String> deploymentResourceNames = processEngine.getRepositoryService()
-                .getDeploymentResourceNames("2501");
+                .getDeploymentResourceNames(deploymentId);
         String imageName = null;
         for (String name : deploymentResourceNames) {
             System.out.println("name:" + name);
@@ -110,7 +119,7 @@ public class SysMenuServiceImplTest {
         System.out.println("imageName:" + imageName);
 
         InputStream inputStream = processEngine.getRepositoryService()
-                .getResourceAsStream("2501", imageName);
+                .getResourceAsStream(deploymentId, imageName);
         File target = new File("D:\\develop\\" + imageName);
         if (!target.getParentFile().exists()) {
             target.getParentFile().mkdirs();

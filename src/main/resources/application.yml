@@ -1,17 +1,23 @@
+# 数据库配置
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
     url: jdbc:mysql://localhost/jbhim?characterEncoding=utf-8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
 
+# 服务
 server:
   port: 80
 
+# 文件上传路径配置
 file:
-  staticAccessPath: /api/files/**
+  # 静态资源对外暴露的访问路径
+  staticAccessPath: /static/files/**
+  #文件上传目录
   uploadFolder: D:/develop/work/jbhim/public/files/
