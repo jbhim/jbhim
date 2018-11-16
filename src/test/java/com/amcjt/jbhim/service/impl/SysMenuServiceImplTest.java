@@ -53,7 +53,7 @@ public class SysMenuServiceImplTest {
                 .createDeployment()
                 .name("HelloWorld")
                 .addClasspathResource("processes/HelloWorld.bpmn")
-                .addClasspathResource("processes/HelloWorld.png")
+                .addClasspathResource("public/files/HelloWorld.png")
                 .deploy();
         System.out.println("部署流程===>  流程id:" + deploy.getId() + "     流程名:" + deploy.getName());
     }

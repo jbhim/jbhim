@@ -1,4 +1,4 @@
-package com.amcjt.jbhim;
+package com.amcjt.jbhim.config;
 
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
