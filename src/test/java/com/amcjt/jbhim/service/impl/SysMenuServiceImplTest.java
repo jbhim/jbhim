@@ -106,7 +106,7 @@ public class SysMenuServiceImplTest {
      */
     @Test
     public void viewImage() throws IOException {
-        String deploymentId = "2501";
+        String deploymentId = "1";
         List<String> deploymentResourceNames = processEngine.getRepositoryService()
                 .getDeploymentResourceNames(deploymentId);
         String imageName = null;
@@ -114,18 +114,20 @@ public class SysMenuServiceImplTest {
             System.out.println("name:" + name);
             if (name.indexOf(".png") > 0) {
                 imageName = name;
+
+                System.out.println("imageName:" + imageName);
+
+                InputStream inputStream = processEngine.getRepositoryService()
+                        .getResourceAsStream(deploymentId, imageName);
+                File target = new File("D:\\develop\\" + imageName);
+                if (!target.getParentFile().exists()) {
+                    target.getParentFile().mkdirs();
+                }
+                Files.copy(inputStream, target.toPath());
+                System.out.println("copy successful");
             }
         }
-        System.out.println("imageName:" + imageName);
 
-        InputStream inputStream = processEngine.getRepositoryService()
-                .getResourceAsStream(deploymentId, imageName);
-        File target = new File("D:\\develop\\" + imageName);
-        if (!target.getParentFile().exists()) {
-            target.getParentFile().mkdirs();
-        }
-        Files.copy(inputStream, target.toPath());
-        System.out.println("copy successful");
 
     }
 

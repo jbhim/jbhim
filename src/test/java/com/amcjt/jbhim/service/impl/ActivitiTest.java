@@ -56,6 +56,9 @@ public class ActivitiTest {
 
     }
 
+    /**
+     * 开始任务
+     */
     @Test
     public void processStart() {
         //runtimeService.startProcessInstanceById("amcjt:1:5");
