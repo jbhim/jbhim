@@ -17,8 +17,8 @@ public class CommonUtil {
      * @return 是否是手机号
      */
     public static boolean isPhoneNumberValid(String phoneNumber) {
-        return Pattern.compile("^(13|17|14|15|18|16|19)\\d{9}")
-                .matcher(phoneNumber).matches();
+        String regex = "^(13|17|14|15|18|16|19)\\d{9}";
+        return Pattern.compile(regex).matcher(phoneNumber).matches();
     }
 
     /**
