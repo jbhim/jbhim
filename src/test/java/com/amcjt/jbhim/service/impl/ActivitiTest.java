@@ -47,11 +47,11 @@ public class ActivitiTest {
     @Test
     public void deploy() {
         Deployment deploy = repositoryService.createDeployment()
-                .name("审批流程")
+                .name("并行网关")
                 //.addClasspathResource("processes/LeaveBill/LeaveBill.bpmn20.xml")
                 //.addClasspathResource("processes/LeaveBill/LeaveBill.bpmn20.png")
-                .addClasspathResource("processes/sequenceFlow/sequenceFlow.bpmn20.png")
-                .addClasspathResource("processes/sequenceFlow/sequenceFlow.bpmn20.xml")
+                //.addClasspathResource("processes/sequenceFlow/sequenceFlow.bpmn20.png")
+                .addClasspathResource("processes/paralleGateWay/paralleGateWay.bpmn20.xml")
                 .deploy();
         System.out.println("deploy.getName()=>" + deploy.getName());
         System.out.println("deploy.getId()=>" + deploy.getId());
@@ -68,7 +68,7 @@ public class ActivitiTest {
     @Test
     public void processStart() {
         //runtimeService.startProcessInstanceById("amcjt:1:5");
-        String key = "sequenceFlow";
+        String key = "paralleGateWay";
         ProcessInstance amcjt = runtimeService.startProcessInstanceByKey(key);
         System.out.println("getId ===>" + amcjt.getId());
         System.out.println("getDeploymentId ===>" + amcjt.getDeploymentId());
@@ -85,7 +85,7 @@ public class ActivitiTest {
     @Test
     public void findUserTask() {
         //任务办理人
-        String assignee = "赵六";
+        String assignee = "卖家";
 
         Task task = taskService.createTaskQuery()
                 .taskAssignee(assignee)
