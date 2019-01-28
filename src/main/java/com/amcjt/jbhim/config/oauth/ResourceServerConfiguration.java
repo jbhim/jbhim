@@ -9,16 +9,18 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+    public static final String[] cando = {"/test/ex"};
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("resource-server-rest-api").stateless(true);
+        resources.resourceId("resource-server-rest-api");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+                .antMatchers(cando).permitAll()
+                .anyRequest().authenticated();
     }
 }
