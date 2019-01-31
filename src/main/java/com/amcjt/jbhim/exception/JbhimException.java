@@ -1,6 +1,6 @@
 package com.amcjt.jbhim.exception;
 
-import com.amcjt.jbhim.enums.ResultEnum;
+import com.amcjt.jbhim.utils.enums.ResultEnum;
 import lombok.Getter;
 
 /**

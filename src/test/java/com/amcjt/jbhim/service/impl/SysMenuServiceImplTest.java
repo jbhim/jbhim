@@ -1,6 +1,6 @@
 package com.amcjt.jbhim.service.impl;
 
-import com.amcjt.jbhim.entity.SysMenuEntity;
+import com.amcjt.jbhim.jpa.entity.SysMenuEntity;
 import com.amcjt.jbhim.service.SysMenuService;
 import com.amcjt.jbhim.utils.UUIDGenerator;
 import org.activiti.engine.ProcessEngine;

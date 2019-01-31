@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.enums;
+package com.amcjt.jbhim.utils.enums;
 
 import lombok.Getter;
 
