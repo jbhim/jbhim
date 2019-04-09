@@ -1,7 +1,7 @@
 package com.amcjt.jbhim.service.impl;
 
-import com.amcjt.jbhim.entity.SysMenuEntity;
-import com.amcjt.jbhim.repository.SysMenuRepository;
+import com.amcjt.jbhim.jpa.entity.SysMenuEntity;
+import com.amcjt.jbhim.jpa.repository.SysMenuRepository;
 import com.amcjt.jbhim.service.SysMenuService;
 import org.springframework.stereotype.Service;
 
