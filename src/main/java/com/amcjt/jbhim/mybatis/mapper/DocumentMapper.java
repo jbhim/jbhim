@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.mybatis.dao;
+package com.amcjt.jbhim.mybatis.mapper;
 
 import com.amcjt.jbhim.mybatis.entity.DocumentDirectory;
 import org.springframework.stereotype.Repository;
