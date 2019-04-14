@@ -1,16 +1,14 @@
 # 数据库配置
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-  profiles:
-    active: prod
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
+    password: 123456
+    url: jdbc:mysql://localhost/jbhim?characterEncoding=utf-8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+
 # 服务
 server:
   port: 80
+
 # 文件上传路径配置
 file:
   # 静态资源对外暴露的访问路径
