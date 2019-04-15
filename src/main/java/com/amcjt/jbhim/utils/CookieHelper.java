@@ -12,8 +12,6 @@ import java.util.Map;
 public class CookieHelper {
     /**
      * 读取所有cookie
-     *
-     * @return
      */
     public static Map<String, String> getCookies() {
         Map<String, String> map = new HashMap<>();
@@ -28,9 +26,6 @@ public class CookieHelper {
 
     /**
      * 创建cookie,并将新cookie添加
-     *
-     * @param cookieName
-     * @param cookieValue
      */
     public static void addCookie(String cookieName, String cookieValue) {
         addCookie(cookieName, cookieValue, true);
