@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-    private static final String[] cando = {"/test/ex"};
+    private static final String[] cando = {"/test/**"};
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

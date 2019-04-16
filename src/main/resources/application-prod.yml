@@ -1,11 +1,8 @@
 # 数据库配置
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
     password: ${mysql_password}
     url: jdbc:mysql://amcjt.com:3306/jbhim?characterEncoding=utf-8&useSSL=false
-    type: com.alibaba.druid.pool.DruidDataSource
 
   jpa:
     show-sql: true

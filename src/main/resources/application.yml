@@ -2,8 +2,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-  profiles:
-    active: prod
+    username: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    #不加这句则默认为myisam引擎
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

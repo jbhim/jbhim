@@ -37,4 +37,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         manager.createUser(User.withUsername("jbhim").password(finalPassword).authorities("USER").build());
         return manager;
     }
+
 }
