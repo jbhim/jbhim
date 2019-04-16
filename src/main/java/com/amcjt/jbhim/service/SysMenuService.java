@@ -1,6 +1,6 @@
 package com.amcjt.jbhim.service;
 
-import com.amcjt.jbhim.jpa.entity.SysMenuEntity;
+import com.amcjt.jbhim.repository.jpa.entity.SysMenuEntity;
 
 import java.util.List;
 

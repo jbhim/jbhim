@@ -1,7 +1,7 @@
 package com.amcjt.jbhim.service;
 
 import com.amcjt.jbhim.model.TreeModel;
-import com.amcjt.jbhim.mybatis.entity.DocumentDirectory;
+import com.amcjt.jbhim.repository.mybatis.entity.DocumentDirectory;
 
 import java.util.List;
 

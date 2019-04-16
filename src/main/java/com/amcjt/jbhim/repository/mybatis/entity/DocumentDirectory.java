@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.mybatis.entity;
+package com.amcjt.jbhim.repository.mybatis.entity;
 
 import lombok.Data;
 

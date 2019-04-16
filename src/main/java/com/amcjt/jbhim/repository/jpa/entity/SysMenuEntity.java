@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.jpa.entity;
+package com.amcjt.jbhim.repository.jpa.entity;
 
 import lombok.Data;
 

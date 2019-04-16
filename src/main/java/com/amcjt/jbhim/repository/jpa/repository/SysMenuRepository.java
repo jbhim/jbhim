@@ -1,6 +1,6 @@
-package com.amcjt.jbhim.jpa.repository;
+package com.amcjt.jbhim.repository.jpa.repository;
 
-import com.amcjt.jbhim.jpa.entity.SysMenuEntity;
+import com.amcjt.jbhim.repository.jpa.entity.SysMenuEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.amcjt.jbhim.mybatis.mapper.DocumentMapper">
+<mapper namespace="com.amcjt.jbhim.repository.mybatis.mapper.DocumentMapper">
 
-    <select id="getDocumentDir" resultType="com.amcjt.jbhim.mybatis.entity.DocumentDirectory">
+    <select id="getDocumentDir" resultType="com.amcjt.jbhim.repository.mybatis.entity.DocumentDirectory">
         SELECT ID, `NAME`, PARENT_ID, CREATE_TIME, `LEVEL`
         FROM `sys_sharedocument_directory`
         WHERE STATE = 1

@@ -1,8 +1,8 @@
 package com.amcjt.jbhim.service.impl;
 
 import com.amcjt.jbhim.model.TreeModel;
-import com.amcjt.jbhim.mybatis.mapper.DocumentMapper;
-import com.amcjt.jbhim.mybatis.entity.DocumentDirectory;
+import com.amcjt.jbhim.repository.mybatis.mapper.DocumentMapper;
+import com.amcjt.jbhim.repository.mybatis.entity.DocumentDirectory;
 import com.amcjt.jbhim.service.DocumentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
