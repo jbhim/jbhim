@@ -182,7 +182,7 @@ CREATE PROCEDURE insert_menu()
           INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u7, u1, '员工列表', 'iframe/employeeList', NULL, '3', '2', a);
           INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u8, u1, '菜单管理', 'iframe/menuList', NULL, '4', '2', a);
           INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u9, u2, '基础设置', 'tenant/edit', NULL, '1', '2', a);
-          INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u10, u2, '管理员变更', 'sys/manage-Account', NULL, '2', '2', a);
+          INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u10, u2, '管理员变更', 'sys/manage-AccountModel', NULL, '2', '2', a);
           INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u11, u2, '操作日志', 'sys/log', NULL, '3', '2', a);
           INSERT INTO `manage_menu` (`id`, `parentId`, `name`, `link`, `icon`, `sort`, `level`, `tenantId`) VALUES (u12, u2, '登录日志', 'sys/login-log', NULL, '4', '2', a);
           -- 默认权限数据

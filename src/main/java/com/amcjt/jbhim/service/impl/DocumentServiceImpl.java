@@ -1,9 +1,10 @@
 package com.amcjt.jbhim.service.impl;
 
 import com.amcjt.jbhim.model.TreeModel;
-import com.amcjt.jbhim.repository.mybatis.mapper.DocumentMapper;
 import com.amcjt.jbhim.repository.mybatis.entity.DocumentDirectory;
+import com.amcjt.jbhim.repository.mybatis.mapper.DocumentMapper;
 import com.amcjt.jbhim.service.DocumentService;
+import com.amcjt.jbhim.utils.TreeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,27 +38,8 @@ public class DocumentServiceImpl implements DocumentService {
             treeModels.add(treeModel);
         });
         //构建数
-        return buildTree(treeModels);
+        return TreeUtil.buildTree(treeModels);
     }
 
-    private static List<TreeModel> buildTree(List<TreeModel> buildList) {
-        List<TreeModel> treeList = new ArrayList<>();
-        for (TreeModel childrenMenu : buildList) {
-            boolean flag = false;
-            for (TreeModel parentMenu : buildList) {
-                if (parentMenu.getId().equals(childrenMenu.getParentId())) {
-                    flag = true;
-                    if (parentMenu.getChildren() == null) {
-                        parentMenu.setChildren(new ArrayList<>());
-                    }
-                    parentMenu.getChildren().add(childrenMenu);
-                    break;
-                }
-            }
-            if (!flag) {
-                treeList.add(childrenMenu);
-            }
-        }
-        return treeList;
-    }
+
 }
