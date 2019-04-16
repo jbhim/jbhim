@@ -5,6 +5,9 @@ import com.amcjt.jbhim.service.UserDetail;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Administrator
+ */
 @Service
 public class UserDetailImpl implements UserDetail {
     @Override
