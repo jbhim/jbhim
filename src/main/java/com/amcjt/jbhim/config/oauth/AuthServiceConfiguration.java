@@ -1,10 +1,10 @@
 package com.amcjt.jbhim.config.oauth;
 
+import com.amcjt.jbhim.service.UserDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -21,9 +21,9 @@ import javax.annotation.Resource;
 public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Resource
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager myAuthenticationManager;
     @Resource
-    private UserDetailsService userDetailsService;
+    private UserDetail userDetailsService;
     @Resource
     BCryptPasswordEncoder passwordEncoder;
 
@@ -57,7 +57,7 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .tokenStore(new InMemoryTokenStore())
-                .authenticationManager(authenticationManager)
+                .authenticationManager(myAuthenticationManager)
                 .userDetailsService(userDetailsService);
     }
 }
