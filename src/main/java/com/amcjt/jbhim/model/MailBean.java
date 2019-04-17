@@ -3,6 +3,7 @@ package com.amcjt.jbhim.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Data
 public class MailBean implements Serializable {
@@ -12,5 +13,8 @@ public class MailBean implements Serializable {
     private String subject;
     //邮件内容
     private String content;
-
+    //邮件内容html
+    private String htmlContent;
+    //附件 key: value => name: file/is
+    private Map<String, Object> attachment;
 }

@@ -5,7 +5,7 @@ spring:
     host: smtp.qq.com
     username: 724721900@qq.com
     #QQ邮箱的授权码
-    password: 自己申请
+    password: nfwapzuvndtvbcef
     default-encoding: UTF-8
     properties:
       mail:
@@ -24,6 +24,7 @@ spring:
       ddl-auto: update
     #不加这句则默认为myisam引擎
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
