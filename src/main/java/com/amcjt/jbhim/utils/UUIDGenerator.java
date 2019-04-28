@@ -3,7 +3,8 @@ package com.amcjt.jbhim.utils;
 import java.util.UUID;
 
 public class UUIDGenerator {
-    private static final Object lock = new Object();
+    public static final UUIDGenerator INSTANCE = new UUIDGenerator();
+    private static final Object LOCK = new Object();
 
     private static long lastTime;
     private static long clockSequence = 0;
@@ -22,7 +23,7 @@ public class UUIDGenerator {
             e.printStackTrace();
         }
 
-        synchronized (lock) {
+        synchronized (LOCK) {
             if (currentTimeMillis > lastTime) {
                 lastTime = currentTimeMillis;
                 clockSequence = 0;
@@ -39,6 +40,10 @@ public class UUIDGenerator {
     }
 
     public static String sequentialUUIDString() {
+        return sequentialUUID().toString().toUpperCase();
+    }
+
+    public String generateUUIDString() {
         return sequentialUUID().toString().toUpperCase();
     }
 }

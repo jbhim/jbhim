@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * @author jbhim
+ */
 @Data
 public class AccountModel implements UserDetails {
 

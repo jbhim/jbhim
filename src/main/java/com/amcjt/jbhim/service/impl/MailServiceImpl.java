@@ -1,6 +1,6 @@
 package com.amcjt.jbhim.service.impl;
 
-import com.amcjt.jbhim.model.MailBean;
+import com.amcjt.jbhim.model.MailModel;
 import com.amcjt.jbhim.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,29 +33,29 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendSimpleMail(MailBean mailBean) {
+    public void sendSimpleMail(MailModel mailModel) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         //邮件发送人
         simpleMailMessage.setFrom(mailSender);
         //邮件接收人
-        simpleMailMessage.setTo(mailBean.getRecipient());
+        simpleMailMessage.setTo(mailModel.getRecipient());
         //邮件主题
-        simpleMailMessage.setSubject(mailBean.getSubject());
+        simpleMailMessage.setSubject(mailModel.getSubject());
         //邮件内容
-        simpleMailMessage.setText(mailBean.getContent());
+        simpleMailMessage.setText(mailModel.getContent());
         javaMailSender.send(simpleMailMessage);
     }
 
     @Override
-    public void sendHTMLMail(MailBean mailBean) {
+    public void sendHTMLMail(MailModel mailModel) {
         MimeMessage mimeMailMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = null;
         try {
             mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
             mimeMessageHelper.setFrom(mailSender);
-            mimeMessageHelper.setTo(mailBean.getRecipient());
-            mimeMessageHelper.setSubject(mailBean.getSubject());
-            mimeMessageHelper.setText(mailBean.getHtmlContent(), true);
+            mimeMessageHelper.setTo(mailModel.getRecipient());
+            mimeMessageHelper.setSubject(mailModel.getSubject());
+            mimeMessageHelper.setText(mailModel.getHtmlContent(), true);
             javaMailSender.send(mimeMailMessage);
         } catch (MessagingException e) {
             log.error("sendHTMLMail: ", e);
@@ -64,17 +64,17 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendAttachmentMail(MailBean mailBean) {
+    public void sendAttachmentMail(MailModel mailModel) {
         MimeMessage mimeMailMessage = null;
         try {
             mimeMailMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
             mimeMessageHelper.setFrom(mailSender);
-            mimeMessageHelper.setTo(mailBean.getRecipient());
-            mimeMessageHelper.setSubject(mailBean.getSubject());
-            mimeMessageHelper.setText(mailBean.getContent());
+            mimeMessageHelper.setTo(mailModel.getRecipient());
+            mimeMessageHelper.setSubject(mailModel.getSubject());
+            mimeMessageHelper.setText(mailModel.getContent());
             //文件路径
-            Map<String, Object> attachment = mailBean.getAttachment();
+            Map<String, Object> attachment = mailModel.getAttachment();
             if (attachment != null && attachment.size() > 0) {
                 for (Map.Entry<String, Object> entry : attachment.entrySet()) {
                     String key = entry.getKey();
@@ -98,14 +98,14 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendInlineMail(MailBean mailBean) {
+    public void sendInlineMail(MailModel mailModel) {
         MimeMessage mimeMailMessage = null;
         try {
             mimeMailMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
             mimeMessageHelper.setFrom(mailSender);
-            mimeMessageHelper.setTo(mailBean.getRecipient());
-            mimeMessageHelper.setSubject(mailBean.getSubject());
+            mimeMessageHelper.setTo(mailModel.getRecipient());
+            mimeMessageHelper.setSubject(mailModel.getSubject());
             mimeMessageHelper.setText("<html><body>带静态资源的邮件内容，这个一张IDEA配置的照片:<img src='cid:picture' /></body></html>", true);
             //文件路径
             FileSystemResource file = new FileSystemResource(new File("src/main/resources/static/image/mail.png"));

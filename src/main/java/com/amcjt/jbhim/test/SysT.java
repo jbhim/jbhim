@@ -1,6 +1,9 @@
 package com.amcjt.jbhim.test;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -12,7 +15,8 @@ import java.util.List;
  * @author jbhim
  * @date 2019/4/13/013.
  */
-public class SysT {
+@Component
+public class SysT implements ApplicationListener<ContextRefreshedEvent> {
     public static void main(String[] args) {
         //System.getenv().forEach((key, value) -> System.out.println(key + ": " + value));
         //System.getProperties().forEach((key, value) -> System.out.println(key + ": " + value));
@@ -32,5 +36,12 @@ public class SysT {
         int second = now1.getSecond();
         int minute = now1.getMinute();
         System.out.println("" + hour + minute + second);
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
+            System.out.println("hello word");
+        }
     }
 }

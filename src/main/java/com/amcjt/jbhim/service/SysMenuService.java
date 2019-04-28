@@ -1,11 +1,11 @@
 package com.amcjt.jbhim.service;
 
-import com.amcjt.jbhim.repository.jpa.entity.SysMenuEntity;
+import com.amcjt.jbhim.repository.jpa.entity.SysMenu;
 
 import java.util.List;
 
 public interface SysMenuService {
-    List<SysMenuEntity> findAllMenu();
+    List<SysMenu> findAllMenu();
 
-    SysMenuEntity saveMenu(SysMenuEntity sysMenuEntity);
+    SysMenu saveMenu(SysMenu sysMenu);
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 @Data
-public class MailBean implements Serializable {
+public class MailModel implements Serializable {
     /**
      * 邮件接收人
      */

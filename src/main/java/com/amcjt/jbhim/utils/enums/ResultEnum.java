@@ -15,7 +15,19 @@ public enum ResultEnum {
     /**
      * 参数不正确
      */
-    PARAM_ERROR(1, "参数不正确");
+    PARAM_ERROR(1, "参数不正确"),
+    /**
+     * 用户名错误
+     */
+    USERNAME_NOT_FOUND(400, "用户名错误"),
+    /**
+     * 密码错误
+     */
+    PASSWORD_NOT_FOUND(400, "密码错误"),
+    /**
+     * 找不到数据
+     */
+    NOT_FOUND(404, "找不到数据");
 
     private Integer code;
     private String message;
