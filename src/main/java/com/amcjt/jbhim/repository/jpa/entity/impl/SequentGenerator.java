@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.repository.jpa;
+package com.amcjt.jbhim.repository.jpa.entity.impl;
 
 import com.amcjt.jbhim.repository.Entity;
 import com.amcjt.jbhim.utils.UUIDGenerator;
@@ -8,6 +8,10 @@ import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
 
+/**
+ * @author JBHIM
+ * 数据库唯一主键 uuid生成器
+ */
 public class SequentGenerator implements IdentifierGenerator {
 
     @Override

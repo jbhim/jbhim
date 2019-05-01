@@ -1,5 +1,6 @@
 package com.amcjt.jbhim.repository.jpa.entity;
 
+import com.amcjt.jbhim.repository.jpa.entity.impl.EntityImpl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,5 +25,7 @@ public class Account extends EntityImpl {
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    private String depId;
+    private String postId;
     private boolean enabled;
 }

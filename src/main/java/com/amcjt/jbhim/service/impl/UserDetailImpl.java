@@ -6,6 +6,7 @@ import com.amcjt.jbhim.repository.jpa.entity.Account;
 import com.amcjt.jbhim.repository.jpa.repository.AccountRepository;
 import com.amcjt.jbhim.service.UserDetail;
 import com.amcjt.jbhim.utils.PaginatedFilter;
+import com.amcjt.jbhim.utils.UpdateTool;
 import com.amcjt.jbhim.utils.enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 /**
@@ -45,8 +47,18 @@ public class UserDetailImpl implements UserDetail {
 
     @Override
     public void save(Account account) {
-        if (account.getPassword() != null) {
-            account.setPassword(passwordEncoder.encode(account.getPassword()));
+        if (StringUtils.isBlank(account.getId())) {
+            String maxJobNum = accountRepository.getMaxJobNum();
+            String pattern = "000000";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
+            String jobNum = maxJobNum == null ? pattern : decimalFormat.format(Double.parseDouble(maxJobNum));
+            account.setJobNum(jobNum);
+            if (account.getPassword() != null) {
+                account.setPassword(passwordEncoder.encode(account.getPassword()));
+            }
+        } else {
+            Account source = findById(account.getId());
+            UpdateTool.copyNullProperties(source, account);
         }
         Account save = accountRepository.save(account);
         if (save == null) {

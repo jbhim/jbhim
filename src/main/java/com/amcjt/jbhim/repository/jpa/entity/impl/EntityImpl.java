@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.repository.jpa.entity;
+package com.amcjt.jbhim.repository.jpa.entity.impl;
 
 import com.amcjt.jbhim.repository.Entity;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class EntityImpl implements Entity {
     @Id
     @Column(length = 36)
     @GeneratedValue(generator = "seq-uuid")
-    @GenericGenerator(name = "seq-uuid", strategy = "com.amcjt.jbhim.repository.jpa.SequentGenerator")
+    @GenericGenerator(name = "seq-uuid", strategy = "com.amcjt.jbhim.repository.jpa.entity.impl.SequentGenerator")
     private String id;
 
     @Column

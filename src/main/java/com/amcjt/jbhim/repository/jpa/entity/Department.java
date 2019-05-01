@@ -8,21 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * @author jbhim
+ * @date 2019/5/1/001.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "sys_menu")
-public class SysMenu extends EntityImpl {
-
+@Table(name = "department")
+public class Department extends EntityImpl {
     @Column
-    private String name;
-
-    @Column
-    private String link;
-
+    private String depName;
     @Column
     private String parentId;
-
-    @Column()
-    private Integer sort;
 }

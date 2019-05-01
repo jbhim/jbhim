@@ -4,6 +4,7 @@ import com.amcjt.jbhim.repository.jpa.entity.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
@@ -18,4 +19,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     Page<Account> findAllByJobNumEquals(String jobNum, Pageable pageable);
 
     Optional<Account> findByUsernameOrPhone(String username, String phone);
+
+    @Query(nativeQuery = true, value = "select MAX(a.jobNum+1) from account a")
+    String getMaxJobNum();
 }
