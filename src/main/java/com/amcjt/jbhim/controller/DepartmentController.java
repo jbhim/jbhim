@@ -1,7 +1,7 @@
 package com.amcjt.jbhim.controller;
 
-import com.amcjt.jbhim.repository.jpa.entity.Account;
-import com.amcjt.jbhim.service.UserDetail;
+import com.amcjt.jbhim.repository.jpa.entity.Department;
+import com.amcjt.jbhim.service.DepartmentService;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -15,30 +15,29 @@ import java.util.Map;
 
 /**
  * @author jbhim
- * @date 2019/4/27/027.
+ * @date 2019/5/2/002.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/department")
 @Slf4j
-public class UserController {
-
-    private final UserDetail userDetail;
+public class DepartmentController {
+    private final DepartmentService departmentService;
 
     @Autowired
-    public UserController(UserDetail userDetail) {
-        this.userDetail = userDetail;
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @PostMapping
-    public ResultVO save(@RequestBody Account account) {
-        userDetail.save(account);
+    public ResultVO save(@RequestBody Department department) {
+        departmentService.save(department);
         return ResultVO.success();
     }
 
     @GetMapping
     public ResultVO findAll(PaginatedFilter paginatedFilter) {
         Map<String, Object> map = new HashMap<>();
-        Page<Account> all = userDetail.findAll(paginatedFilter);
+        Page<Department> all = departmentService.findAll(paginatedFilter);
         map.put("list", all.getContent());
         map.put("count", all.getTotalElements());
         return ResultVO.success(map);
@@ -46,13 +45,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResultVO findById(@PathVariable("id") String id) {
-        Account account = userDetail.findById(id);
-        return ResultVO.success(account);
+        Department department = departmentService.findById(id);
+        return ResultVO.success(department);
     }
 
     @Delete("/{id}")
     public ResultVO delete(@PathVariable("id") String id) {
-        userDetail.delete(id);
+        departmentService.delete(id);
         return ResultVO.success();
     }
 }

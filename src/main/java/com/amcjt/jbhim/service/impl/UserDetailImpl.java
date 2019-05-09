@@ -72,7 +72,7 @@ public class UserDetailImpl implements UserDetail {
         String name = paginatedFilter.getFilter("name");
         String jobNum = paginatedFilter.getFilter("jobNum");
         Sort sort = Sort.by(Sort.Direction.ASC, "jobNum");
-        PageRequest of = PageRequest.of(paginatedFilter.getStart(), paginatedFilter.getSize(), sort);
+        PageRequest of = PageRequest.of(paginatedFilter.getIndex(), paginatedFilter.getSize(), sort);
         Page<Account> pageList;
         if (StringUtils.isAllBlank(name, jobNum)) {
             pageList = accountRepository.findAll(of);
