@@ -40,7 +40,7 @@ public class UserDetailImpl implements UserDetail {
     public AccountModel loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<Account> accountOptional = accountRepository.findByUsernameOrPhone(userName, userName);
         AccountModel accountModel = new AccountModel();
-        Account account = accountOptional.orElseThrow(() -> new JbhimException(ResultEnum.NOT_FOUND));
+        Account account = accountOptional.orElseThrow(() -> new JbhimException(ResultEnum.USERNAME_NOT_FOUND));
         BeanUtils.copyProperties(account, accountModel);
         return accountModel;
     }

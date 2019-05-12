@@ -1,5 +1,6 @@
 package com.amcjt.jbhim.config.oauth;
 
+import com.amcjt.jbhim.exception.AuthExceptionHandler;
 import com.amcjt.jbhim.service.UserDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,8 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
     private UserDetail userDetailsService;
     @Resource
     BCryptPasswordEncoder passwordEncoder;
+    @Resource
+    private AuthExceptionHandler authExceptionHandler;
 
     @Bean
     public BCryptPasswordEncoder cryptPasswordEncoder() {
@@ -38,6 +41,7 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
                 .passwordEncoder(passwordEncoder)
+                .authenticationEntryPoint(authExceptionHandler)
                 .allowFormAuthenticationForClients();
     }
 
@@ -59,5 +63,6 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
                 .tokenStore(new InMemoryTokenStore())
                 .authenticationManager(myAuthenticationManager)
                 .userDetailsService(userDetailsService);
+        endpoints.exceptionTranslator(authExceptionHandler);
     }
 }

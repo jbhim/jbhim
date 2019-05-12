@@ -1,5 +1,6 @@
 package com.amcjt.jbhim.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class AccountModel implements UserDetails {
     private String phone;
     private String email;
     private String username;
+    @JsonIgnore
     private String password;
     private boolean enabled;
 
