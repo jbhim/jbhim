@@ -60,6 +60,7 @@ public class UserDetailImpl implements UserDetail {
             Account source = findById(account.getId());
             UpdateTool.copyNullProperties(source, account);
         }
+        account.setEnabled(true);
         Account save = accountRepository.save(account);
         if (save == null) {
             log.info("【{}】 保存用户失败", this.getClass().getSimpleName());
