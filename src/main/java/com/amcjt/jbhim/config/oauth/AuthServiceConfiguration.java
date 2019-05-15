@@ -54,7 +54,7 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
                 .secret(finalPassword)
                 .authorizedGrantTypes("password")
                 .scopes("read")
-                .accessTokenValiditySeconds(3600);
+                .accessTokenValiditySeconds(720000);
     }
 
     @Override

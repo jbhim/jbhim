@@ -55,6 +55,8 @@ public class UserDetailImpl implements UserDetail {
             account.setJobNum(jobNum);
             if (account.getPassword() != null) {
                 account.setPassword(passwordEncoder.encode(account.getPassword()));
+            } else {
+                account.setPassword(passwordEncoder.encode("123456"));
             }
         } else {
             Account source = findById(account.getId());
