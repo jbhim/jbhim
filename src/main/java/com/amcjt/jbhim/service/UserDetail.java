@@ -2,6 +2,7 @@ package com.amcjt.jbhim.service;
 
 import com.amcjt.jbhim.repository.jpa.entity.Account;
 import com.amcjt.jbhim.utils.PaginatedFilter;
+import com.amcjt.jbhim.vo.ResultVO;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -14,7 +15,7 @@ public interface UserDetail extends UserDetailsService {
      */
     void save(Account account);
 
-    Page<Account> findAll(PaginatedFilter paginatedFilter);
+    ResultVO findAll(PaginatedFilter paginatedFilter);
 
     Account findById(String id);
 

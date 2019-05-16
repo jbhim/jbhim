@@ -43,11 +43,7 @@ public class UserController {
 
     @GetMapping
     public ResultVO findAll(PaginatedFilter paginatedFilter) {
-        Map<String, Object> map = new HashMap<>();
-        Page<Account> all = userDetail.findAll(paginatedFilter);
-        map.put("list", all.getContent());
-        map.put("count", all.getTotalElements());
-        return ResultVO.success(map);
+        return userDetail.findAll(paginatedFilter);
     }
 
     @GetMapping("/{id}")

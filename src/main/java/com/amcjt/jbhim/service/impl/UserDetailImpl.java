@@ -4,10 +4,13 @@ import com.amcjt.jbhim.exception.JbhimException;
 import com.amcjt.jbhim.model.AccountModel;
 import com.amcjt.jbhim.repository.jpa.entity.Account;
 import com.amcjt.jbhim.repository.jpa.repository.AccountRepository;
+import com.amcjt.jbhim.repository.jpa.repository.DepartmentRepository;
+import com.amcjt.jbhim.repository.jpa.repository.PostRepository;
 import com.amcjt.jbhim.service.UserDetail;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.utils.UpdateTool;
 import com.amcjt.jbhim.utils.enums.ResultEnum;
+import com.amcjt.jbhim.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +22,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Administrator
@@ -29,10 +36,14 @@ import java.util.Optional;
 public class UserDetailImpl implements UserDetail {
 
     private final AccountRepository accountRepository;
+    private final DepartmentRepository departmentRepository;
+    private final PostRepository postRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserDetailImpl(AccountRepository accountRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserDetailImpl(AccountRepository accountRepository, DepartmentRepository departmentRepository, PostRepository postRepository, BCryptPasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
+        this.departmentRepository = departmentRepository;
+        this.postRepository = postRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -71,7 +82,7 @@ public class UserDetailImpl implements UserDetail {
     }
 
     @Override
-    public Page<Account> findAll(PaginatedFilter paginatedFilter) {
+    public ResultVO findAll(PaginatedFilter paginatedFilter) {
         String name = paginatedFilter.getFilter("name");
         String jobNum = paginatedFilter.getFilter("jobNum");
         Sort sort = Sort.by(Sort.Direction.ASC, "jobNum");
@@ -86,7 +97,21 @@ public class UserDetailImpl implements UserDetail {
         } else {
             pageList = accountRepository.findAllByNameContainingOrJobNumEquals(name, jobNum, of);
         }
-        return pageList;
+
+        List<Account> newPageList = pageList.getContent().stream().peek(account -> {
+            if (account.getDepId() != null) {
+                departmentRepository.findById(account.getDepId())
+                        .ifPresent(department -> account.setDepName(department.getDepName()));
+            }
+            if (account.getPostId() != null) {
+                postRepository.findById(account.getPostId())
+                        .ifPresent(post -> account.setDepName(post.getPostName()));
+            }
+        }).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", newPageList);
+        map.put("count", pageList.getTotalElements());
+        return ResultVO.success(map);
     }
 
     @Override

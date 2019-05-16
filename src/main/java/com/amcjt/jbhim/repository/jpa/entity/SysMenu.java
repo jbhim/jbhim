@@ -15,14 +15,17 @@ import javax.persistence.Table;
 public class SysMenu extends EntityImpl {
 
     @Column
-    private String name;
+    private String title;
 
     @Column
-    private String link;
+    private String path;
 
     @Column
     private String parentId;
 
-    @Column()
+    @Column
+    private String icon;
+
+    @Column
     private Integer sort;
 }
