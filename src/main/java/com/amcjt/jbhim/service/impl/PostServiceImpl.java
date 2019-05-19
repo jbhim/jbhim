@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author jbhim
  * @date 2019/5/2/002.
@@ -26,6 +28,11 @@ public class PostServiceImpl implements PostService {
     public Page<Post> findAll(PaginatedFilter paginatedFilter) {
         PageRequest of = PageRequest.of(paginatedFilter.getIndex(), paginatedFilter.getSize());
         return postRepository.findAll(of);
+    }
+
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll();
     }
 
     @Override

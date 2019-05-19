@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author jbhim
  * @date 2019/5/2/002.
@@ -31,6 +33,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Page<Department> findAll(PaginatedFilter paginatedFilter) {
         PageRequest of = PageRequest.of(paginatedFilter.getIndex(), paginatedFilter.getSize());
         return departmentRepository.findAll(of);
+    }
+
+    @Override
+    public List<Department> findAll() {
+        return departmentRepository.findAll();
     }
 
     @Override

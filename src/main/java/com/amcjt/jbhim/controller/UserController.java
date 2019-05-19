@@ -8,14 +8,11 @@ import com.amcjt.jbhim.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author jbhim
@@ -44,6 +41,11 @@ public class UserController {
     @GetMapping
     public ResultVO findAll(PaginatedFilter paginatedFilter) {
         return userDetail.findAll(paginatedFilter);
+    }
+
+    @GetMapping("findAll")
+    public ResultVO findAll() {
+        return userDetail.findAll();
     }
 
     @GetMapping("/{id}")

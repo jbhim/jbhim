@@ -93,7 +93,7 @@ public class UserDetailImpl implements UserDetail {
         } else if (StringUtils.isNotBlank(jobNum) && StringUtils.isBlank(name)) {
             pageList = accountRepository.findAllByJobNumEquals(jobNum, of);
         } else if (StringUtils.isNotBlank(name) && StringUtils.isBlank(jobNum)) {
-            pageList = accountRepository.findAllByNameContaining(jobNum, of);
+            pageList = accountRepository.findAllByNameContaining(name, of);
         } else {
             pageList = accountRepository.findAllByNameContainingOrJobNumEquals(name, jobNum, of);
         }
@@ -105,13 +105,19 @@ public class UserDetailImpl implements UserDetail {
             }
             if (account.getPostId() != null) {
                 postRepository.findById(account.getPostId())
-                        .ifPresent(post -> account.setDepName(post.getPostName()));
+                        .ifPresent(post -> account.setPostName(post.getPostName()));
             }
         }).collect(Collectors.toList());
         Map<String, Object> map = new HashMap<>();
         map.put("list", newPageList);
         map.put("count", pageList.getTotalElements());
         return ResultVO.success(map);
+    }
+
+    @Override
+    public ResultVO findAll() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "jobNum");
+        return ResultVO.success(accountRepository.findAll(sort));
     }
 
     @Override

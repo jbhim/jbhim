@@ -33,7 +33,7 @@ public class DocumentServiceImpl implements DocumentService {
         getDocumentDirTree().forEach(documentDirectory -> {
             TreeModel treeModel = new TreeModel();
             treeModel.setId(String.valueOf(documentDirectory.getId()));
-            treeModel.setName(documentDirectory.getName());
+            treeModel.setTitle(documentDirectory.getName());
             treeModel.setParentId(documentDirectory.getParentId());
             treeModels.add(treeModel);
         });

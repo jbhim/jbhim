@@ -20,5 +20,5 @@ public class Post extends EntityImpl {
     @Column
     private String postName;
     @Column
-    private String depId;
+    private String postDesc;
 }

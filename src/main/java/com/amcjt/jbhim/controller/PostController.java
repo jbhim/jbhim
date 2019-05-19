@@ -5,7 +5,6 @@ import com.amcjt.jbhim.service.PostService;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -49,9 +48,14 @@ public class PostController {
         return ResultVO.success(post);
     }
 
-    @Delete("/{id}")
+    @DeleteMapping("/{id}")
     public ResultVO delete(@PathVariable("id") String id) {
         postService.delete(id);
         return ResultVO.success();
+    }
+
+    @GetMapping("findAll")
+    public ResultVO findAll() {
+        return ResultVO.success(postService.findAll());
     }
 }

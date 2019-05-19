@@ -17,6 +17,8 @@ public interface UserDetail extends UserDetailsService {
 
     ResultVO findAll(PaginatedFilter paginatedFilter);
 
+    ResultVO findAll();
+
     Account findById(String id);
 
     void delete(String id);
