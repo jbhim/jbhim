@@ -20,5 +20,5 @@ public interface SysMenuService {
 
     List<TreeModel> getMenuTree();
 
-    List<TreeModel> menuByUser(String currentUserId);
+    List<TreeModel> menuByUser(String currentUserId, String currentUserName);
 }

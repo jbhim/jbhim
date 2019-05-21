@@ -18,11 +18,10 @@ public class NewsController {
 
     @GetMapping("news")
     private Map getNews() {
-        Map news = restTemplate.getForObject("http://v.juhe.cn/toutiao/index?type={0}&key={1}",
+        return restTemplate.getForObject("http://v.juhe.cn/toutiao/index?type={0}&key={1}",
                 Map.class,
                 "keji",
                 "849ef49fa5c4cadd61200d0ce0d50da8");
-        return news;
     }
 
 }

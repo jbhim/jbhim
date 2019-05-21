@@ -54,6 +54,6 @@ public class MenuController extends BaseController {
 
     @GetMapping("menuByUser")
     public ResultVO menuByUser() {
-        return ResultVO.success(sysMenuService.menuByUser(getCurrentUserId()));
+        return ResultVO.success(sysMenuService.menuByUser(getCurrentUserId(), getCurrentUserName()));
     }
 }

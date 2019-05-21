@@ -25,6 +25,10 @@ public enum ResultEnum {
      */
     PASSWORD_NOT_FOUND(400, "密码错误"),
     /**
+     * 上传失败
+     */
+    UPLOAD_FAIL(400, "上传失败"),
+    /**
      * 找不到数据
      */
     NOT_FOUND(404, "找不到数据");

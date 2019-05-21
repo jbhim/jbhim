@@ -31,6 +31,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+  # 上传文件总的最大值
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      # 单个文件的最大值
+      max-file-size: 100MB
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -44,7 +50,9 @@ file:
   # 静态资源对外暴露的访问路径
   staticAccessPath: /static/files/**
   #文件上传目录
-  uploadFolder: D:/develop/work/jbhim/public/files/
+  uploadFolder: E:/javaAndMore/projectspace/jbhim/public/files/
+  staticAccessUrl: http://localhost/static/files/
+
 
 #设置一个邮件发送人
 jbhim:

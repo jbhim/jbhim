@@ -12,5 +12,7 @@ server:
 file:
   # 静态资源对外暴露的访问路径
   staticAccessPath: /static/files/**
-  #文件上传目录
-  uploadFolder: D:/develop/work/jbhim/public/files/
+  # 静态资源对外暴露的访问路径
+  staticAccessUrl: http://localhost/static/files/
+  # 文件上传目录
+  uploadFolder: E:/javaAndMore/projectspace/jbhim/public/files/

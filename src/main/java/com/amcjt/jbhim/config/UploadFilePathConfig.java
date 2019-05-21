@@ -1,5 +1,6 @@
 package com.amcjt.jbhim.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,10 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author jbhim
  */
 @Configuration
+@Data
 public class UploadFilePathConfig implements WebMvcConfigurer {
 
     @Value("${file.staticAccessPath}")
     private String staticAccessPath;
+    @Value("${file.staticAccessUrl}")
+    private String staticAccessUrl;
     @Value("${file.uploadFolder}")
     private String uploadFolder;
 

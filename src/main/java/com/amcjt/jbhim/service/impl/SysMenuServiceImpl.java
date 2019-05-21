@@ -72,7 +72,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public List<TreeModel> menuByUser(String currentUserId) {
+    public List<TreeModel> menuByUser(String currentUserId, String currentUsername) {
         //获取角色
         Set<String> roles = roleMemberRepository.findAllByUserId(currentUserId).stream()
                 .map(RoleMember::getRoleId).collect(Collectors.toSet());
@@ -83,6 +83,9 @@ public class SysMenuServiceImpl implements SysMenuService {
                 .collect(Collectors.toSet());
 
         List<SysMenu> allById = menuRepository.findAllById(menuId);
+        if ("admin".equals(currentUsername)) {
+            allById = menuRepository.findAll();
+        }
         return TreeUtil.buildTree(convertToTreeModel(allById));
     }
 

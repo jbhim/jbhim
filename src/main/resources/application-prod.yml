@@ -20,3 +20,5 @@ file:
   staticAccessPath: /static/files/**
   #文件上传目录
   uploadFolder: D:/develop/work/jbhim/public/files/
+  # http 访问静态资源
+  staticAccessUrl: http://localhost/static/files/
