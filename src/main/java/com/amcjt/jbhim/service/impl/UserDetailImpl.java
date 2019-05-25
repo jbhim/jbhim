@@ -64,7 +64,7 @@ public class UserDetailImpl implements UserDetail {
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
             String jobNum = maxJobNum == null ? pattern : decimalFormat.format(Double.parseDouble(maxJobNum));
             account.setJobNum(jobNum);
-            if (account.getPassword() != null) {
+            if (StringUtils.isNotBlank(account.getPassword())) {
                 account.setPassword(passwordEncoder.encode(account.getPassword()));
             } else {
                 account.setPassword(passwordEncoder.encode("123456"));
