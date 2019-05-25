@@ -1,4 +1,4 @@
-package com.amcjt.jbhim.service.impl;
+package com.amcjt.jbhim.service;
 
 import com.amcjt.jbhim.repository.jpa.entity.Bulletin;
 import com.amcjt.jbhim.utils.PaginatedFilter;
@@ -15,4 +15,6 @@ public interface BulletinService {
     void delete(String id);
 
     void publish(String id);
+
+    ResultVO show();
 }

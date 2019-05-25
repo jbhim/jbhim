@@ -94,6 +94,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         allById.forEach(sysMenu -> {
             TreeModel treeModel = new TreeModel();
             treeModel.setId(sysMenu.getId());
+            treeModel.setPath(sysMenu.getPath());
             treeModel.setParentId(sysMenu.getParentId());
             treeModel.setTitle(sysMenu.getTitle());
             treeModelList.add(treeModel);

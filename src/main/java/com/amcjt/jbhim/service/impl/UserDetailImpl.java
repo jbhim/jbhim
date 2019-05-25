@@ -98,7 +98,7 @@ public class UserDetailImpl implements UserDetail {
             pageList = accountRepository.findAllByNameContainingOrJobNumEquals(name, jobNum, of);
         }
 
-        List<Account> newPageList = pageList.getContent().stream().peek(account -> {
+        List<Account> newPageList = pageList.getContent().parallelStream().peek(account -> {
             if (account.getDepId() != null) {
                 departmentRepository.findById(account.getDepId())
                         .ifPresent(department -> account.setDepName(department.getDepName()));
@@ -134,4 +134,24 @@ public class UserDetailImpl implements UserDetail {
         accountRepository.deleteById(id);
     }
 
+    @Override
+    public void resetPassword(Account account, String currentUserId) {
+        if (StringUtils.isBlank(account.getId())) {
+            account.setId(currentUserId);
+        }
+        Account byId = findById(account.getId());
+        String rawPassword = account.getPassword();
+        if (StringUtils.isBlank(account.getPassword())) {
+            rawPassword = "123456";
+        }
+        byId.setPassword(passwordEncoder.encode(rawPassword));
+        accountRepository.save(byId);
+    }
+
+    @Override
+    public void enable(Account account) {
+        Account byId = findById(account.getId());
+        byId.setEnabled(!byId.isEnabled());
+        accountRepository.save(byId);
+    }
 }

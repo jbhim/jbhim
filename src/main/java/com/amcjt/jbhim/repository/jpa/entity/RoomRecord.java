@@ -18,6 +18,8 @@ import java.util.Date;
 @Table(name = "room_record")
 public class RoomRecord extends EntityImpl {
     private String roomId;
+    private String userId;
+    private String userName;
     private String roomName;
     private Date startTime;
     private Date endTime;

@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, String> {
 
-    Page<Task> findAllByTitleContaining(String title, Pageable pageable);
+    Page<Task> findAllByUserNameContaining(String title, Pageable pageable);
+
+    Page<Task> findAllByUserNameContainingAndIsFinish(String title, boolean finish, Pageable pageable);
 
     Page<Task> findAllByTitleContainingAndUserId(String title, String userId, Pageable pageable);
+
+    Page<Task> findAllByTitleContainingAndUserIdAndIsFinish(String title, String userId, boolean finish, Pageable pageable);
 }

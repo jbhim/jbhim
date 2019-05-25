@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/user")
 @Slf4j
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserDetail userDetail;
     private final ConsumerTokenServices consumerTokenServices;
@@ -75,5 +75,17 @@ public class UserController {
             String tokenId = authorization.substring("Bearer".length() + 1);
             consumerTokenServices.revokeToken(tokenId);
         }
+    }
+
+    @PostMapping("resetPassword")
+    public ResultVO resetPassword(@RequestBody Account account) {
+        userDetail.resetPassword(account, getCurrentUserId());
+        return ResultVO.success();
+    }
+
+    @PostMapping("enable")
+    public ResultVO enable(@RequestBody Account account) {
+        userDetail.enable(account);
+        return ResultVO.success();
     }
 }

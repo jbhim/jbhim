@@ -37,15 +37,13 @@ public class TaskController extends BaseController {
 
     @GetMapping("/{id}")
     public ResultVO findById(@PathVariable String id) {
-        taskService.findById(id);
-        return ResultVO.success();
+        return ResultVO.success(taskService.findById(id));
     }
 
     @GetMapping("getMyTask")
     public ResultVO getMyTask(PaginatedFilter paginatedFilter) {
         paginatedFilter.setFilter("userId", getCurrentUserId());
-        taskService.findAll(paginatedFilter);
-        return ResultVO.success();
+        return taskService.findAll(paginatedFilter);
     }
 
     @PostMapping("finish")

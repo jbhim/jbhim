@@ -21,5 +21,7 @@ public class Bulletin extends EntityImpl {
     private String title;
     private String content;
     private String attachment;
+    private String userId;
+    private String userName;
     private boolean publish;
 }

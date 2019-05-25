@@ -24,4 +24,9 @@ public interface RoleMemberRepository extends JpaRepository<RoleMember, String> 
     @Modifying
     @Query(nativeQuery = true, value = "delete from role_member where roleId =:roleId and userId = :userId")
     void deleteRoleMembersByRoleIdAndUserId(@Param("roleId") String roleId, @Param("userId") String userId);
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "delete from role_member where roleId =:roleId")
+    void deleteRoleMembersByRoleId(@Param("roleId") String roleId);
 }

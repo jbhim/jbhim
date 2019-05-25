@@ -36,12 +36,24 @@ public class TaskServiceImpl implements TaskService {
         PageRequest of = PageRequest.of(paginatedFilter.getIndex(), paginatedFilter.getSize(), sort);
         String title = paginatedFilter.getFilter("title");
         String userId = paginatedFilter.getFilter("userId");
+        String finish = paginatedFilter.getFilter("finish");
         title = title == null ? "" : title;
         Page<Task> taskPage;
         if (StringUtils.isBlank(userId)) {
-            taskPage = taskRepository.findAllByTitleContaining(title, of);
+            if (StringUtils.isBlank(finish)) {
+                taskPage = taskRepository.findAllByUserNameContaining(title, of);
+            } else {
+                taskPage = taskRepository
+                        .findAllByUserNameContainingAndIsFinish(title, "true".equals(finish), of);
+            }
         } else {
-            taskPage = taskRepository.findAllByTitleContainingAndUserId(title, userId, of);
+            if (StringUtils.isBlank(finish)) {
+                taskPage = taskRepository.findAllByTitleContainingAndUserId(title, userId, of);
+            } else {
+                taskPage = taskRepository
+                        .findAllByTitleContainingAndUserIdAndIsFinish(title, userId, "true".equals(finish), of);
+            }
+
         }
         return ResultVO.success(new HashMap<String, Object>() {{
             put("list", taskPage.getContent());

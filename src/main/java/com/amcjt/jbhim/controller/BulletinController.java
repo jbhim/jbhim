@@ -1,7 +1,7 @@
 package com.amcjt.jbhim.controller;
 
 import com.amcjt.jbhim.repository.jpa.entity.Bulletin;
-import com.amcjt.jbhim.service.impl.BulletinService;
+import com.amcjt.jbhim.service.BulletinService;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/bulletin")
 @Slf4j
-public class BulletinController {
+public class BulletinController extends BaseController {
     @Resource
     private BulletinService bulletinService;
 
@@ -27,6 +27,8 @@ public class BulletinController {
 
     @PostMapping
     public ResultVO findAll(@RequestBody Bulletin bulletin) {
+        bulletin.setUserId(getCurrentUserId());
+        bulletin.setUserName(getCurrentUserName());
         bulletinService.save(bulletin);
         return ResultVO.success();
     }
@@ -39,18 +41,22 @@ public class BulletinController {
 
     @GetMapping("/{id}")
     public ResultVO findById(@PathVariable("id") String id) {
-        bulletinService.findById(id);
-        return ResultVO.success();
+        return ResultVO.success(bulletinService.findById(id));
     }
 
     /**
      * 发布下架
      *
-     * @param id
+     * @param bulletin
      */
-    @GetMapping("/publish")
-    public ResultVO publish(@PathVariable("id") String id) {
-        bulletinService.publish(id);
+    @PostMapping("/publish")
+    public ResultVO publish(@RequestBody Bulletin bulletin) {
+        bulletinService.publish(bulletin.getId());
         return ResultVO.success();
+    }
+
+    @GetMapping("/show")
+    public ResultVO show() {
+        return bulletinService.show();
     }
 }

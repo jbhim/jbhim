@@ -1,6 +1,7 @@
 package com.amcjt.jbhim.controller;
 
 import com.amcjt.jbhim.repository.jpa.entity.Room;
+import com.amcjt.jbhim.repository.jpa.entity.RoomRecord;
 import com.amcjt.jbhim.service.RoomService;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.vo.ResultVO;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/room")
 @Slf4j
-public class RoomController {
+public class RoomController extends BaseController {
     @Resource
     private RoomService roomService;
 
@@ -26,7 +27,7 @@ public class RoomController {
     }
 
     @PostMapping
-    public ResultVO findAll(@RequestBody Room room) {
+    public ResultVO save(@RequestBody Room room) {
         roomService.save(room);
         return ResultVO.success();
     }
@@ -39,8 +40,19 @@ public class RoomController {
 
     @GetMapping("/{id}")
     public ResultVO findById(@PathVariable("id") String id) {
-        roomService.findById(id);
-        return ResultVO.success();
+        return ResultVO.success(roomService.findById(id));
     }
 
+    @GetMapping("show")
+    public ResultVO show() {
+        return roomService.show();
+    }
+
+    @PostMapping("/roomRecord")
+    public ResultVO roomRecord(@RequestBody RoomRecord roomRecord) {
+        roomRecord.setUserId(getCurrentUserId());
+        roomRecord.setUserName(getCurrentName());
+        roomService.saveRoomRecord(roomRecord);
+        return ResultVO.success();
+    }
 }

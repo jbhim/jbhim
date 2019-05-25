@@ -1,6 +1,5 @@
 package com.amcjt.jbhim.repository.jpa.repository;
 
-import com.amcjt.jbhim.repository.jpa.entity.Bulletin;
 import com.amcjt.jbhim.repository.jpa.entity.Room;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,5 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RoomRepository extends JpaRepository<Room, String> {
+    Page<Room> findAllByUsed(boolean used, Pageable pageable);
 
 }

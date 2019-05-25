@@ -2,6 +2,7 @@ package com.amcjt.jbhim.service;
 
 import com.amcjt.jbhim.repository.jpa.entity.Bulletin;
 import com.amcjt.jbhim.repository.jpa.entity.Room;
+import com.amcjt.jbhim.repository.jpa.entity.RoomRecord;
 import com.amcjt.jbhim.utils.PaginatedFilter;
 import com.amcjt.jbhim.vo.ResultVO;
 
@@ -17,4 +18,8 @@ public interface RoomService {
     Room findById(String id);
 
     ResultVO findAll(PaginatedFilter paginatedFilter);
+
+    ResultVO show();
+
+    void saveRoomRecord(RoomRecord roomRecord);
 }
