@@ -54,13 +54,13 @@ public class RoomServiceImpl implements RoomService {
     public ResultVO findAll(PaginatedFilter paginatedFilter) {
         Sort sort = Sort.by(Sort.Direction.ASC, "createTime");
         PageRequest of = PageRequest.of(paginatedFilter.getIndex(), paginatedFilter.getSize(), sort);
-        String used = paginatedFilter.getFilter("used");
+        String name = paginatedFilter.getFilter("name");
 
         Page<Room> all;
-        if (StringUtils.isBlank(used)) {
+        if (StringUtils.isBlank(name)) {
             all = roomRepository.findAll(of);
         } else {
-            all = roomRepository.findAllByUsed("true".equals(used), of);
+            all = roomRepository.findAllByNameContaining(name, of);
         }
 
         Map<String, Object> map = new HashMap<>();
