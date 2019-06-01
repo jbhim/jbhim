@@ -1,3 +1,4 @@
+/*
 package com.amcjt.jbhim.service.impl;
 
 import org.activiti.engine.ProcessEngine;
@@ -32,18 +33,50 @@ public class ActivitiTest {
     @Autowired
     private TaskService taskService;
 
-    /**
-     * 初始化28张表
-     */
+    */
+/**
+ * 初始化28张表
+ * <p>
+ * 部署流程
+ * <p>
+ * 开始任务
+ * <p>
+ * 查询个人任务
+ * <p>
+ * 完成任务
+ * <p>
+ * 流程变量设置与获取
+ * <p>
+ * 流程变量设置与获取
+ * <p>
+ * Class.getResource() and Class.getClassLoader()
+ * <p>
+ * 部署流程
+ * <p>
+ * 开始任务
+ * <p>
+ * 查询个人任务
+ * <p>
+ * 完成任务
+ * <p>
+ * 流程变量设置与获取
+ * <p>
+ * 流程变量设置与获取
+ * <p>
+ * Class.getResource() and Class.getClassLoader()
+ *//*
+
     @Test
     public void dropOrCreate() {
         processEngine.getName();
         System.out.println("dropOrCreate");
     }
 
-    /**
-     * 部署流程
-     */
+    */
+/**
+ * 部署流程
+ *//*
+
     @Test
     public void deploy() {
         Deployment deploy = repositoryService.createDeployment()
@@ -62,9 +95,11 @@ public class ActivitiTest {
 
     }
 
-    /**
-     * 开始任务
-     */
+    */
+/**
+ * 开始任务
+ *//*
+
     @Test
     public void processStart() {
         //runtimeService.startProcessInstanceById("amcjt:1:5");
@@ -79,9 +114,11 @@ public class ActivitiTest {
         System.out.println("getProcessDefinitionVersion ===>" + amcjt.getProcessDefinitionVersion());
     }
 
-    /**
-     * 查询个人任务
-     */
+    */
+/**
+ * 查询个人任务
+ *//*
+
     @Test
     public void findUserTask() {
         //任务办理人
@@ -99,9 +136,11 @@ public class ActivitiTest {
         System.out.println("任务创建时间====>" + task.getCreateTime());
     }
 
-    /**
-     * 完成任务
-     */
+    */
+/**
+ * 完成任务
+ *//*
+
     @Test
     public void completeTask() {
         String taskId = "22503";
@@ -113,9 +152,11 @@ public class ActivitiTest {
     }
 
 
-    /**
-     * 流程变量设置与获取
-     */
+    */
+/**
+ * 流程变量设置与获取
+ *//*
+
     @Test
     public void setVar() {
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
@@ -128,9 +169,11 @@ public class ActivitiTest {
         runtimeService.startProcessInstanceByKey(processDefinition.getKey(), map);
     }
 
-    /**
-     * 流程变量设置与获取
-     */
+    */
+/**
+ * 流程变量设置与获取
+ *//*
+
     @Test
     public void getVar() {
         Task task = taskService.createTaskQuery()
@@ -143,9 +186,11 @@ public class ActivitiTest {
         System.out.println(reason);
     }
 
-    /**
-     * Class.getResource() and Class.getClassLoader()
-     */
+    */
+/**
+ * Class.getResource() and Class.getClassLoader()
+ *//*
+
     @Test
     public void resource(){
         System.out.println(this.getClass().getResource(""));
@@ -156,3 +201,4 @@ public class ActivitiTest {
 
 
 }
+*/
