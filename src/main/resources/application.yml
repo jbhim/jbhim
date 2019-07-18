@@ -30,6 +30,15 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  redis:
+    host: 47.93.216.116
+    port: 6379
+    password: ${PASSWORD}
+    database: 0
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
 
   # 上传文件总的最大值
   servlet:
@@ -58,3 +67,15 @@ file:
 jbhim:
   mail:
     sender: 724721900@qq.com
+
+wechat:
+  # 信息绑定页面路由
+  bindOpenIdPage: https://rc-dev-cust-test-mobile.ywsoftware.cn:9443/public-registration
+  # 微信获取code 回调地址(需要在微信开发者中心配置域名)
+  codeRedirectUrl: https://rc-dev-cust-test2298.ywsoftware.cn:9443/cust-api/wechat/userInfo
+  mp:
+    appId: wx7576f64beebc6725
+    appSecret: 708c6dc168eecec0212ff55beb673208
+    templateId:
+      #任务转移模板消息id
+      taskTransfer: JUQP6KkPUDJ-qzMiIRdUBzr-k8OAy7RRJszHX7LYLU0

@@ -19,6 +19,10 @@ public class JbhimException extends RuntimeException {
     public JbhimException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
+    }
 
+    public JbhimException(String message) {
+        super(message);
+        this.code = 100000;
     }
 }
