@@ -11,7 +11,7 @@ import java.util.Collection;
  * @author jbhim
  */
 @Data
-public class AccountModel implements UserDetails {
+public class AccountModel {
 
     private String id;
     private String name;
@@ -22,24 +22,4 @@ public class AccountModel implements UserDetails {
     @JsonIgnore
     private String password;
     private boolean enabled;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
 }
