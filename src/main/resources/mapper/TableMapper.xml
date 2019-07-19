@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amcjt.jbhim.repository.mybatis.mapper.TableMapper">
+
+    <select id="findTableById" resultType="com.amcjt.jbhim.repository.mybatis.entity.Table">
+        SELECT `id`, `name`, `tableName`, `isDelete`
+        FROM `data_table`
+        where IsDelete = false
+          and id = #{tableId}
+    </select>
+    <select id="findColumnById" resultType="com.amcjt.jbhim.repository.mybatis.entity.Column">
+        SELECT `id`,
+               `tableId`,
+               `name`,
+               `columnName`,
+               `columnType`,
+               `isPrimaryKey`,
+               `isRequired`,
+               `isUnicode`,
+               `isProtected`,
+               `isHidden`,
+               `defaultValue`
+        FROM data_column
+        where IsDelete = false
+          and tableId = #{tableId}
+    </select>
+</mapper>
