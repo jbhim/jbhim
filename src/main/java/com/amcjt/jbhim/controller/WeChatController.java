@@ -6,20 +6,14 @@ import com.amcjt.jbhim.service.impl.WeChatService;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.script.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.TreeMap;
@@ -72,39 +66,15 @@ public class WeChatController extends BaseController {
      */
     @RequestMapping("callback")
     @ResponseBody
-    public String callback(HttpServletRequest request, String signature, String timestamp, String nonce, String echostr) {
-
-            String method = request.getMethod();
-            if ("POST".equals(method)) {
-                return weChatService.pushInfo();
-            } else {
-                if (weChatService.checkSignature()) {
-                    return request.getParameter("echostr");
-                }
-            }
-            return "";
-
-    }
-
-    /**
-     * test
-     */
-    @PostMapping("callback")
-    @ResponseBody
-    public String callbackPost(HttpServletRequest httpServletRequest) throws IOException {
-        System.out.println(httpServletRequest);
-        StringBuffer resultBuffer = new StringBuffer();
-        String tempLine = null;
-        try (ServletInputStream inputStream = httpServletRequest.getInputStream();
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
-            while ((tempLine = reader.readLine()) != null) {
-                resultBuffer.append(tempLine);
+    public String callback(HttpServletRequest request) throws IOException, DocumentException {
+        String method = request.getMethod();
+        if ("POST".equals(method)) {
+            return weChatService.pushInfo();
+        } else {
+            if (weChatService.checkSignature()) {
+                return request.getParameter("echostr");
             }
         }
-        System.out.println(resultBuffer);
-
-        return "success";
+        return "";
     }
-
 }

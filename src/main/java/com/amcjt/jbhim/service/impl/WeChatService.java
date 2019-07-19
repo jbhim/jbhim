@@ -6,14 +6,25 @@ import com.amcjt.jbhim.exception.JbhimException;
 import com.amcjt.jbhim.model.wx.AccessToken;
 import com.amcjt.jbhim.model.wx.TemplateMsg;
 import com.amcjt.jbhim.utils.HttpRequestHelper;
+import com.amcjt.jbhim.utils.XmlHelper;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -49,6 +60,8 @@ public class WeChatService {
     private RestTemplate restTemplate;
     @Autowired
     private StringRedisTemplate redisTemplate;
+    @Autowired
+    private HttpServletRequest request;
 
     public String authorize() throws UnsupportedEncodingException {
         String mpAppId = weChatConfig.getMpAppId();
@@ -134,15 +147,41 @@ public class WeChatService {
         String nonce = request.getParameter("nonce");
         String[] arrTmp = new String[]{weChatConfig.getToken(), timestamp, nonce};
         Arrays.sort(arrTmp);
-        String strTmp = StringUtils.join(arrTmp, "");
+        String strTmp = String.join("", arrTmp);
         strTmp = DigestUtils.sha1Hex(strTmp).toLowerCase();
-        if (strTmp.equals(signature)) {
-            return true;
-        }
-        return false;
+        return strTmp.equals(signature);
     }
 
-    public String pushInfo() {
-        return null;
+    public String pushInfo() throws IOException, DocumentException {
+        InputStream inputStream = request.getInputStream();
+        SAXReader saxReader = new SAXReader();
+        Document document = saxReader.read(inputStream);
+        Element root = document.getRootElement();
+        String msgType = root.element("MsgType").getText();
+        String fromUserName = root.element("FromUserName").getText();
+        String toUserName = root.element("ToUserName").getText();
+        String response;
+        switch (msgType) {
+            case "event":
+                String Event = root.element("Event").getText();
+                response = "success";
+                break;
+            case "text":
+                String content = root.element("Content").getText();
+                List<XmlHelper.News> data = new ArrayList<>();
+                XmlHelper.News news = new XmlHelper.News("tset", "没什么说的", "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2687849711,3701428606&fm=85&app=2&f=JPEG?w=121&h=75&s=12F67681F27D1A2FA8BD7893030050C0", "www.amcjt.com");
+                data.add(news);
+                response = XmlHelper.wxNewsXml(fromUserName, toUserName, data);
+                break;
+            case "image":
+            case "voice":
+            case "vedio":
+            case "location":
+            case "link":
+            default:
+                response = "success";
+                break;
+        }
+        return response;
     }
 }

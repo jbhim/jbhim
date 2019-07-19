@@ -69,6 +69,7 @@ jbhim:
     sender: 724721900@qq.com
 
 wechat:
+  token: xxxxxxxx
   # 信息绑定页面路由
   bindOpenIdPage: https://rc-dev-cust-test-mobile.ywsoftware.cn:9443/public-registration
   # 微信获取code 回调地址(需要在微信开发者中心配置域名)

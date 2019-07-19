@@ -32,4 +32,10 @@ public class WeChatConfig {
      */
     @Value("${wechat.codeRedirectUrl}")
     private String codeRedirectUrl;
+
+    /**
+     * 微信获取code 回调地址(需要在微信开发者中心配置域名)
+     */
+    @Value("${wechat.token}")
+    private String token;
 }
