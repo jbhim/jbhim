@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -127,4 +128,21 @@ public class WeChatService {
         return accessToken;
     }
 
+    public boolean checkSignature() {
+        String signature = request.getParameter("signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        String[] arrTmp = new String[]{weChatConfig.getToken(), timestamp, nonce};
+        Arrays.sort(arrTmp);
+        String strTmp = StringUtils.join(arrTmp, "");
+        strTmp = DigestUtils.sha1Hex(strTmp).toLowerCase();
+        if (strTmp.equals(signature)) {
+            return true;
+        }
+        return false;
+    }
+
+    public String pushInfo() {
+        return null;
+    }
 }

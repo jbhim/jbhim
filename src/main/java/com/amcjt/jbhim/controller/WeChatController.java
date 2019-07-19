@@ -4,6 +4,7 @@ import com.amcjt.jbhim.model.wx.AccessToken;
 import com.amcjt.jbhim.model.wx.TemplateMsg;
 import com.amcjt.jbhim.service.impl.WeChatService;
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.TreeMap;
@@ -65,14 +67,20 @@ public class WeChatController extends BaseController {
     /**
      * test
      */
-    @GetMapping("callback")
+    @RequestMapping("callback")
     @ResponseBody
-    public String callback(String signature, String timestamp, String nonce, String echostr) {
-        System.out.println(signature);
-        System.out.println(timestamp);
-        System.out.println(nonce);
-        System.out.println(echostr);
-        return echostr;
+    public String callback(HttpServletRequest request, String signature, String timestamp, String nonce, String echostr) {
+
+            String method = request.getMethod();
+            if ("POST".equals(method)) {
+                return weChatService.pushInfo();
+            } else {
+                if (weChatService.checkSignature()) {
+                    return request.getParameter("echostr");
+                }
+            }
+            return "";
+
     }
 
     /**
