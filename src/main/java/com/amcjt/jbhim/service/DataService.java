@@ -35,8 +35,8 @@ public class DataService {
     }
 
     private void buildContent(List<Map<String, Object>> content, Table table) {
-        Map<String, Object> map = new HashMap<>();
         table.getColumns().forEach(column -> {
+            Map<String, Object> map = new HashMap<>();
             map.put("tableId", table.getId());
             map.put("name", table.getName());
             map.put("tableName", table.getTableName());
@@ -44,8 +44,9 @@ public class DataService {
             map.put("columnName", column.getName());
             map.put("columnRealName", column.getColumnName());
             map.put("columnType", column.getColumnType().getSqlType());
+            content.add(map);
         });
-        content.add(map);
+
     }
 
     private void buildTitle(List<Map<String, String>> titleList) {
@@ -60,7 +61,7 @@ public class DataService {
 
     private Map<String, String> putMap(String key, String value) {
         Map<String, String> map = new HashMap<>();
-        map.put("filed", key);
+        map.put("field", key);
         map.put("title", value);
         return map;
     }

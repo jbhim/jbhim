@@ -58,7 +58,7 @@ public class ExcelService {
         style.setAlignment(HorizontalAlignment.CENTER);
         // 设置字体
         HSSFFont font = hssfWorkbook.createFont();
-        font.setBold(true);
+        font.setBold(false);
         style.setFont(font);
         return style;
     }

@@ -1,8 +1,6 @@
 package com.amcjt.jbhim.controller;
 
-import com.amcjt.jbhim.model.AccountModel;
 import lombok.Data;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.ServletContext;
@@ -31,20 +29,4 @@ public class BaseController {
         this.rootPath = session.getServletContext().getRealPath("/files");
     }
 
-    public AccountModel getCurrentUserInfo() {
-        return (AccountModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-
-    public String getCurrentUserId() {
-        return getCurrentUserInfo().getId();
-    }
-
-    public String getCurrentUserName() {
-        return getCurrentUserInfo().getUsername();
-    }
-
-    public String getCurrentName() {
-        return getCurrentUserInfo().getName();
-    }
 }

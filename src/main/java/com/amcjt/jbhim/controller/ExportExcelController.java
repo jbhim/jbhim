@@ -19,7 +19,7 @@ public class ExportExcelController extends BaseController {
 
     @GetMapping("/export")
     public ResponseEntity<?> exportExcel(String tableId, HttpServletResponse response) throws IOException {
-        response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("表信息", "UTF-8"));
+        response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("表信息.xlsx", "UTF-8"));
         response.getOutputStream().write(dataService.getTableData(tableId).toByteArray());
         return ResponseEntity.ok().build();
     }
